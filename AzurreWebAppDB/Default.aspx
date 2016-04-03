@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
+    <asp:Button ID="Button1" runat="server" Text="Show Data" OnClick="Button1_Click" />
     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" >
         <Columns>
             <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" />
@@ -12,7 +12,12 @@
     </asp:GridView>
 
 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:emergingDbConnectionString %>" SelectCommand="SELECT * FROM [customer]"></asp:SqlDataSource>
-<asp:EntityDataSource ID="EntityDataSource1" runat="server">
 
-</asp:EntityDataSource>
+    <h4>Update data by ID</h4>
+    <asp:TextBox ID="TextBox1" runat="server" Text="Id" hint="ID"></asp:TextBox>
+    <asp:TextBox ID="TextBox2" runat="server" Text="student" hint="student"></asp:TextBox>
+    <asp:TextBox ID="TextBox3" runat="server" Text="program" hint="program"></asp:TextBox>
+<asp:Button ID="Button2" runat="server" Text="update" OnClick="Button1_Update" />
+
+
 </asp:Content>
