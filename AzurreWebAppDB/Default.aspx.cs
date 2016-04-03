@@ -49,8 +49,7 @@ namespace AzurreWebAppDB
             String program = TextBox3.Text;
 
             System.Data.SqlClient.SqlCommand _SqlCommand1 = new System.Data.SqlClient.SqlCommand("UPDATE customer SET student = @student, program = @program WHERE(Id = @Id)", _SqlConnection);
-
-
+            
             System.Data.SqlClient.SqlDataAdapter _SqlDataAdapter = new System.Data.SqlClient.SqlDataAdapter();
             _SqlDataAdapter.SelectCommand = _SqlCommand1;
 
@@ -62,10 +61,61 @@ namespace AzurreWebAppDB
 
             _SqlDataAdapter.Fill(_DataTable);
             GridView1.DataSource = _DataTable;
-            // GridView1.DataSource = _DataTable;
             GridView1.DataBind();
 
          
+
+        }
+
+        protected void Button1_add(object sender, EventArgs e)
+        {
+            System.Data.SqlClient.SqlConnection _SqlConnection = new System.Data.SqlClient.SqlConnection();
+            _SqlConnection.ConnectionString = "Server=tcp:emergingserver.database.windows.net,1433;Database=emergingDb;User ID=avneet@emergingserver;Password=Tirlok_0173;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;";
+            int Id = Convert.ToInt32(TextBox1.Text);
+            String student = TextBox2.Text;
+            String program = TextBox3.Text;
+
+            System.Data.SqlClient.SqlCommand _SqlCommand1 = new System.Data.SqlClient.SqlCommand("INSERT INTO customer (Id,student,program) Values (@Id,@student,@program)", _SqlConnection);
+
+            System.Data.SqlClient.SqlDataAdapter _SqlDataAdapter = new System.Data.SqlClient.SqlDataAdapter();
+            _SqlDataAdapter.SelectCommand = _SqlCommand1;
+
+            DataTable _DataTable = new DataTable();
+            _DataTable.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            _SqlCommand1.Parameters.Add(new SqlParameter("Id", Id));
+            _SqlCommand1.Parameters.Add(new SqlParameter("student", student));
+            _SqlCommand1.Parameters.Add(new SqlParameter("program", program));
+
+            _SqlDataAdapter.Fill(_DataTable);
+            GridView1.DataSource = _DataTable;
+            GridView1.DataBind();
+
+
+        }
+
+        protected void Button1_delete(object sender, EventArgs e)
+        {
+            System.Data.SqlClient.SqlConnection _SqlConnection = new System.Data.SqlClient.SqlConnection();
+            _SqlConnection.ConnectionString = "Server=tcp:emergingserver.database.windows.net,1433;Database=emergingDb;User ID=avneet@emergingserver;Password=Tirlok_0173;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;";
+            int Id = Convert.ToInt32(TextBox1.Text);
+            String student = TextBox2.Text;
+            String program = TextBox3.Text;
+
+            System.Data.SqlClient.SqlCommand _SqlCommand1 = new System.Data.SqlClient.SqlCommand("DELETE FROM customer WHERE Id = @Id", _SqlConnection);
+
+            System.Data.SqlClient.SqlDataAdapter _SqlDataAdapter = new System.Data.SqlClient.SqlDataAdapter();
+            _SqlDataAdapter.SelectCommand = _SqlCommand1;
+
+            DataTable _DataTable = new DataTable();
+            _DataTable.Locale = System.Globalization.CultureInfo.InvariantCulture;
+            _SqlCommand1.Parameters.Add(new SqlParameter("Id", Id));
+            _SqlCommand1.Parameters.Add(new SqlParameter("student", student));
+            _SqlCommand1.Parameters.Add(new SqlParameter("program", program));
+
+            _SqlDataAdapter.Fill(_DataTable);
+            GridView1.DataSource = _DataTable;
+            GridView1.DataBind();
+
 
         }
     }

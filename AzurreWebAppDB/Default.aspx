@@ -13,11 +13,13 @@
 
 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:emergingDbConnectionString %>" SelectCommand="SELECT * FROM [customer]"></asp:SqlDataSource>
 
-    <h4>Update data by ID</h4>
+    <h4>CRUD data by ID</h4>
     <asp:TextBox ID="TextBox1" runat="server" Text="Id" hint="ID"></asp:TextBox>
     <asp:TextBox ID="TextBox2" runat="server" Text="student" hint="student"></asp:TextBox>
     <asp:TextBox ID="TextBox3" runat="server" Text="program" hint="program"></asp:TextBox>
 <asp:Button ID="Button2" runat="server" Text="update" OnClick="Button1_Update" />
+    <asp:Button ID="Button3" runat="server" Text="add" OnClick="Button1_add" />
+    <asp:Button ID="Button4" runat="server" Text="delete" OnClick="Button1_delete" />
 
 
 </asp:Content>
