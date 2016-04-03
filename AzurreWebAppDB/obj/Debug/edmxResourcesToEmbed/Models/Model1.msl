@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="emergingDbModelStoreContainer" CdmEntityContainer="emergingDbEntities">
+    <EntitySetMapping Name="customers">
+      <EntityTypeMapping TypeName="emergingDbModel.customer">
+        <MappingFragment StoreEntitySet="customer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="student" ColumnName="student" />
+          <ScalarProperty Name="program" ColumnName="program" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

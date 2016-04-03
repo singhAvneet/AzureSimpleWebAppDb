@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NewCustomerDb2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="address" Type="nvarchar" MaxLength="500" />
+    <Property Name="phone" Type="int" />
+  </EntityType>
+  <EntityType Name="order">
+    <Key>
+      <PropertyRef Name="orderId" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="orderId" Type="int" Nullable="false" />
+    <Property Name="product" Type="nvarchar" MaxLength="50" />
+    <Property Name="processed" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="orderDetials">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="invoiceId" Type="int" />
+    <Property Name="productDesc" Type="nvarchar" MaxLength="500" />
+    <Property Name="quantity" Type="int" />
+  </EntityType>
+  <Association Name="FK_order_Tocustomer">
+    <End Role="customer" Type="Self.customer" Multiplicity="1" />
+    <End Role="order" Type="Self.order" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="order">
+        <PropertyRef Name="orderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orderDetials_Toorder">
+    <End Role="order" Type="Self.order" Multiplicity="0..1" />
+    <End Role="orderDetials" Type="Self.orderDetials" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="order">
+        <PropertyRef Name="orderId" />
+      </Principal>
+      <Dependent Role="orderDetials">
+        <PropertyRef Name="invoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NewCustomerDb2ModelStoreContainer">
+    <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="orderDetials" EntityType="Self.orderDetials" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_order_Tocustomer" Association="Self.FK_order_Tocustomer">
+      <End Role="customer" EntitySet="customer" />
+      <End Role="order" EntitySet="order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orderDetials_Toorder" Association="Self.FK_orderDetials_Toorder">
+      <End Role="order" EntitySet="order" />
+      <End Role="orderDetials" EntitySet="orderDetials" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

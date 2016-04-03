@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NewCustomerDb2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="Int32" />
+    <NavigationProperty Name="order" Relationship="Self.FK_order_Tocustomer" FromRole="customer" ToRole="order" />
+  </EntityType>
+  <EntityType Name="order">
+    <Key>
+      <PropertyRef Name="orderId" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="orderId" Type="Int32" Nullable="false" />
+    <Property Name="product" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="processed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="customer" Relationship="Self.FK_order_Tocustomer" FromRole="order" ToRole="customer" />
+    <NavigationProperty Name="orderDetials" Relationship="Self.FK_orderDetials_Toorder" FromRole="order" ToRole="orderDetials" />
+  </EntityType>
+  <EntityType Name="orderDetial">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="invoiceId" Type="Int32" />
+    <Property Name="productDesc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="quantity" Type="Int32" />
+    <NavigationProperty Name="order" Relationship="Self.FK_orderDetials_Toorder" FromRole="orderDetials" ToRole="order" />
+  </EntityType>
+  <Association Name="FK_order_Tocustomer">
+    <End Role="customer" Type="Self.customer" Multiplicity="1" />
+    <End Role="order" Type="Self.order" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="order">
+        <PropertyRef Name="orderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_orderDetials_Toorder">
+    <End Role="order" Type="Self.order" Multiplicity="0..1" />
+    <End Role="orderDetials" Type="Self.orderDetial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="order">
+        <PropertyRef Name="orderId" />
+      </Principal>
+      <Dependent Role="orderDetials">
+        <PropertyRef Name="invoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NewCustomerDb2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="customers" EntityType="Self.customer" />
+    <EntitySet Name="orders" EntityType="Self.order" />
+    <EntitySet Name="orderDetials" EntityType="Self.orderDetial" />
+    <AssociationSet Name="FK_order_Tocustomer" Association="Self.FK_order_Tocustomer">
+      <End Role="customer" EntitySet="customers" />
+      <End Role="order" EntitySet="orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_orderDetials_Toorder" Association="Self.FK_orderDetials_Toorder">
+      <End Role="order" EntitySet="orders" />
+      <End Role="orderDetials" EntitySet="orderDetials" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
