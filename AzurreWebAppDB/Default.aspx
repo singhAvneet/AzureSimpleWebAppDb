@@ -20,6 +20,7 @@
 <asp:Button ID="Button2" runat="server" Text="update" OnClick="Button1_Update" />
     <asp:Button ID="Button3" runat="server" Text="add" OnClick="Button1_add" />
     <asp:Button ID="Button4" runat="server" Text="delete" OnClick="Button1_delete" />
-
+    <br /><br /><br /><br />
+    <asp:Label ID="Label1" runat="server" ></asp:Label>
 
 </asp:Content>
