@@ -12,13 +12,14 @@ namespace AzurreWebAppDB
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            show();
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
-        {
+        public void show() {
+
             Label1.Text = "EXCEPTION ERROR: null";
-            try {
+            try
+            {
                 System.Data.SqlClient.SqlConnection _SqlConnection = new System.Data.SqlClient.SqlConnection();
                 _SqlConnection.ConnectionString = "Server=tcp:emergingserver.database.windows.net,1433;Database=emergingDb;User ID=avneet@emergingserver;Password=Tirlok_0173;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;";
 
@@ -43,9 +44,8 @@ namespace AzurreWebAppDB
 
 
 
-
         }
-
+        
         protected void Button1_Update(object sender, EventArgs e)
         {
             try {
@@ -69,6 +69,7 @@ namespace AzurreWebAppDB
                 _SqlDataAdapter.Fill(_DataTable);
                 GridView1.DataSource = _DataTable;
                 GridView1.DataBind();
+                show();
             }
             catch
             {
@@ -101,6 +102,7 @@ namespace AzurreWebAppDB
                 _SqlDataAdapter.Fill(_DataTable);
                 GridView1.DataSource = _DataTable;
                 GridView1.DataBind();
+                show();
             }
             catch  {
                 Label1.Text = "EXCEPTION ERROR: invalid Id or Id already exsist";
@@ -111,6 +113,7 @@ namespace AzurreWebAppDB
         protected void Button1_delete(object sender, EventArgs e)
         {
             try {
+
                 System.Data.SqlClient.SqlConnection _SqlConnection = new System.Data.SqlClient.SqlConnection();
                 _SqlConnection.ConnectionString = "Server=tcp:emergingserver.database.windows.net,1433;Database=emergingDb;User ID=avneet@emergingserver;Password=Tirlok_0173;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;";
                 int Id = Convert.ToInt32(TextBox1.Text);
@@ -133,7 +136,7 @@ namespace AzurreWebAppDB
                 GridView1.DataBind();
 
 
-
+                show();
             }
             catch
             {
